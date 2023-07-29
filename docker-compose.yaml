@@ -1,0 +1,18 @@
+version: '3.4'
+services:
+  database:
+    image: postgres
+    environment:
+      POSTGRES_USER: useraccount_user
+      POSTGRES_PASSWORD: useraccount_db_pass
+      POSTGRES_DB: useraccount
+      PGDATA: /var/lib/postgresql/data/pgdata
+    ports:
+      - "5432:5432"
+    volumes:
+      - ./.dev/dbdata:/var/lib/postgresql/data
+      - ./.dev/dbentrypoint:/docker-entrypoint-initdb.d
+  cache:
+    image: redis:7.0.12
+    ports:
+      - "6379:6379"
