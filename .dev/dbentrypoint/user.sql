@@ -9,6 +9,7 @@ create table useraccount (
     location varchar,
     date_of_birth date,
     profile_photo varchar,
+    refresh_token varchar,
     created_at timestamp default now(),
     updated_at timestamp default null
 );

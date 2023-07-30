@@ -37,6 +37,7 @@ type User struct {
 	Location     string    `json:"location" gorm:"column:location"`
 	DateOfBirth  time.Time `json:"date_of_birth" gorm:"column:date_of_birth"`
 	ProfilePhoto string    `json:"profile_photo" gorm:"column:profile_photo"`
+	RefreshToken string    `json:"refresh_token" gorm:"column:refresh_token"`
 	CreatedAt    time.Time `json:"created_at" gorm:"column:created_at"`
 	UpdatedAt    time.Time `json:"updated_at" gorm:"column:updated_at"`
 }

@@ -32,7 +32,7 @@ func (h *Handler) Login(c *gin.Context) {
 		return
 	}
 
-	token, err := h.userUsecase.Login(ctx, req)
+	loginResp, err := h.userUsecase.Login(ctx, req)
 
 	if err != nil {
 		log.Printf("[Login] error when Login %+v\n", err)
@@ -40,7 +40,7 @@ func (h *Handler) Login(c *gin.Context) {
 		return
 	}
 
-	c.JSON(http.StatusOK, gin.H{"error": nil, "success": true, "token": token.Token, "is_password_correct": token.IsPasswordCorrect})
+	c.JSON(http.StatusOK, gin.H{"error": nil, "success": true, "token": loginResp.Token, "is_password_correct": loginResp.IsPasswordCorrect})
 }
 
 func (h *Handler) IsLoggedIn(c *gin.Context) {

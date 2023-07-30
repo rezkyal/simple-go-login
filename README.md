@@ -161,3 +161,13 @@ possible responses:
 - unauthorized
 Will get `Unauthorized` and HTTP 401 response status
 
+## Unit Test
+### Mac/Linux
+To run the unit test + coverage report, execute the `make testcover`
+
+### Windows
+Run this on cmd/powershell
+```
+go test -v -coverprofile cover.out ./...
+go tool cover -func cover.out
+```
