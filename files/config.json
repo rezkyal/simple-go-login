@@ -10,7 +10,7 @@
         "address": "localhost:6379"
     },
     "password":{
-        "cost": 42
+        "cost": 10
     },
     "token":{
         "lifespan":10,

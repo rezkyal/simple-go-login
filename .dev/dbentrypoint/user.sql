@@ -4,7 +4,7 @@ create table useraccount (
     fullname varchar,
     password varchar,
     phone_number varchar unique,
-    sex int,
+    sex varchar,
     biography varchar,
     location varchar,
     date_of_birth date,

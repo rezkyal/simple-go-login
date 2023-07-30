@@ -9,7 +9,7 @@ type NewUserInput struct {
 	FullName     string `json:"fullname" binding:"required"`
 	Password     string `json:"password" binding:"required"`
 	PhoneNumber  string `json:"phone_number" binding:"required"`
-	Sex          int    `json:"sex" binding:"required"`
+	Sex          string `json:"sex" binding:"required"`
 	Biography    string `json:"biography" binding:"required"`
 	Location     string `json:"location" binding:"required"`
 	DateOfBirth  string `json:"date_of_birth" binding:"required"`
@@ -32,7 +32,7 @@ type User struct {
 	FullName     string    `json:"fullname" gorm:"column:fullname"`
 	Password     string    `json:"password" gorm:"column:password"`
 	PhoneNumber  string    `json:"phone_number" gorm:"column:phone_number"`
-	Sex          int       `json:"sex" gorm:"column:sex"`
+	Sex          string    `json:"sex" gorm:"column:sex"`
 	Biography    string    `json:"biography" gorm:"column:biography"`
 	Location     string    `json:"location" gorm:"column:location"`
 	DateOfBirth  time.Time `json:"date_of_birth" gorm:"column:date_of_birth"`
