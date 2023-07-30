@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"time"
 
+	enRedis "github.com/rezkyal/simple-go-login/entity/redis"
 	enUser "github.com/rezkyal/simple-go-login/entity/user"
 
 	"golang.org/x/crypto/bcrypt"
@@ -31,15 +32,25 @@ func (r *Repo) SaveNewUser(ctx context.Context, input enUser.User) error {
 }
 
 func (r *Repo) GetUserData(ctx context.Context, email string) (enUser.User, error) {
-	var err error
+	var (
+		redisKey = fmt.Sprintf(enRedis.KeyGetUserData, email)
+	)
 
 	u := enUser.User{}
+
+	err := r.redis.GetJSON(ctx, redisKey, &u)
+
+	if err == nil {
+		return u, nil
+	}
 
 	err = r.db.Model(enUser.User{}).Where("email = ?", email).Take(&u).Error
 
 	if err != nil {
 		return u, fmt.Errorf("[GetUserData] error when query the user data, err: %+v", err)
 	}
+
+	r.redis.SetJSONTTL(ctx, redisKey, u, time.Second*time.Duration(r.cfg.TTL.GetUserData))
 
 	return u, nil
 }

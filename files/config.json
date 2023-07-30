@@ -6,11 +6,17 @@
         "name": "useraccount",
         "port": 5432
     },
+    "redis": {
+        "address": "localhost:6379"
+    },
     "password":{
         "cost": 42
     },
     "token":{
-        "lifespan":2,
+        "lifespan":10,
         "secret": "secretkey"
+    },
+    "ttl":{
+        "GetUserData": 3600
     }
 }

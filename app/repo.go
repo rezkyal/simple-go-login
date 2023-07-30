@@ -14,7 +14,7 @@ type Repos struct {
 func InitRepos(cfg *config.Config, resources *Resources) (*Repos, error) {
 	repos := &Repos{}
 
-	userR, err := userRepo.New(cfg, resources.Database)
+	userR, err := userRepo.New(cfg, resources.Database, resources.Redis)
 	if err != nil {
 		return nil, fmt.Errorf("[InitRepo] failed to init user repo %+v", err)
 	}
