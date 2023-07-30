@@ -1,4 +1,4 @@
-package signup
+package login
 
 import (
 	"context"
@@ -10,12 +10,12 @@ import (
 	enUser "github.com/rezkyal/simple-go-login/entity/user"
 )
 
-func (h *Handler) Signup(c *gin.Context) {
+func (h *Handler) Login(c *gin.Context) {
 	ctx := context.Background()
-	var input enUser.NewUserInput
 
-	err := c.ShouldBindJSON(&input)
+	var req enUser.LoginRequest
 
+	err := c.ShouldBindJSON(&req)
 	valErrs, ok := err.(validator.ValidationErrors)
 	if ok {
 		errList := map[string]string{}
@@ -27,18 +27,22 @@ func (h *Handler) Signup(c *gin.Context) {
 	}
 
 	if err != nil {
-		log.Printf("[Signup] error when BindJSON %+v\n", err)
+		log.Printf("[Login] error when BindJSON %+v\n", err)
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
 	}
 
-	err = h.userUsecase.RegisterNewUser(ctx, input)
+	token, err := h.userUsecase.Login(ctx, req)
 
 	if err != nil {
-		log.Printf("[Signup] error when RegisterNewUser %+v\n", err)
+		log.Printf("[Login] error when Login %+v\n", err)
 		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
 		return
 	}
 
-	c.JSON(http.StatusOK, gin.H{"error": nil, "success": true})
+	c.JSON(http.StatusOK, gin.H{"error": nil, "success": true, "token": token.Token, "is_password_correct": token.IsPasswordCorrect})
+}
+
+func (h *Handler) IsLoggedIn(c *gin.Context) {
+	c.JSON(http.StatusOK, gin.H{"success": true})
 }

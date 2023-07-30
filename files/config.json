@@ -1,0 +1,16 @@
+{
+    "database":{
+        "host": "localhost",
+        "user": "useraccount_user",
+        "password": "useraccount_db_pass",
+        "name": "useraccount",
+        "port": 5432
+    },
+    "password":{
+        "cost": 42
+    },
+    "token":{
+        "lifespan":2,
+        "secret": "secretkey"
+    }
+}
