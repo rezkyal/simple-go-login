@@ -17,6 +17,8 @@ This service use:
 
 ## Structure
 
+![simple-go-structure drawio](https://github.com/rezkyal/simple-go-login/assets/25602049/fbfa31b8-5211-47b5-b95d-58b5476a81ac)
+
 ### App
 Contains the logic to implement the singleton and initiate the struct needed
 
